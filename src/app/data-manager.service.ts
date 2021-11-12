@@ -32,7 +32,12 @@ export class DataManagerService {
   getBridges(): Observable<BridgeId[]> {
     const url = `${this.apiUrl}/bridges`;
     return this.http
-      .get<Bridge>(url)
+      .get<BridgeId[]>(url)
       .pipe(retry(2), catchError(this.handleError));
+  }
+
+  getBridge(id: string): Observable<Bridge> {
+    const url = `${this.apiUrl}/bridges/${id}`;
+    return this.http.get<Bridge>(url).pipe(retry(2), catchError(this.handleError))
   }
 }
