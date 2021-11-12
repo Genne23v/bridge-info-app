@@ -1,8 +1,9 @@
+import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
-import { Bridge, BridgeId } from './bridge';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs'
-import { environment } from '../environments/environment';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+import { BridgeId, Bridge } from './bridge';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +13,26 @@ export class DataManagerService {
 
   constructor(private http: HttpClient) {}
 
-  getBridges(): Observable<BridgeId[]> {
-    const url = `${this.apiUrl}/bridges`
-    return this.http.get<Bridge[]>(url);
+  handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.error instanceof ErrorEvent) {
+      console.log(
+        '[DataManagerService] client-side error',
+        error.error.message
+      );
+    } else {
+      console.log(
+        `[DataManagerService] server-side error: status=${error.status}`,
+        error.error
+      );
+    }
+
+    return throwError('Error communicating with API server');
   }
 
-  getBridge(id: string): Observable<Bridge>{
-    const url = `${this.apiUrl}/bridges/${id}`
-    return this.http.get<Bridge>(url);
+  getBridges(): Observable<BridgeId[]> {
+    const url = `${this.apiUrl}/bridges`;
+    return this.http
+      .get<Bridge>(url)
+      .pipe(retry(2), catchError(this.handleError));
   }
 }
