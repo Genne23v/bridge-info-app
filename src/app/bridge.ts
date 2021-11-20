@@ -1,4 +1,5 @@
 export interface Bridge extends BridgeId {
+  [key:string]: any;
   lat: number;
   lng: number;
   year: number;
