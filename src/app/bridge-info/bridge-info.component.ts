@@ -19,7 +19,6 @@ export class BridgeInfoComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('bridge-info component', this.route.snapshot.params.id);
     this.paramSubscription = this.route.params.subscribe((params: Params) =>
         this.dataService
           .getBridge(params.id)

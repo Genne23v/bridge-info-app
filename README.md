@@ -1,15 +1,24 @@
 # Bridge Information App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
-Angular forms: bridge-form-template-driven, bridge-form-reactive, bridge-form-material components.
+This project is to display Ontario bridge information populated from https//data.ontario/dataset/bridge-conditions
 
-## Development server
+### Bridge Information Pane
+![bridge](./src/assets/bridge.jpg)
+### Material UI Angular Form
+![form](./src/assets/form.jpg)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Various Angular form practice: bridge-form-template-driven, bridge-form-reactive, bridge-form-material components.
 
-## Code scaffolding
+## Run the app
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.<br>
+
+<b>[Routes]<br></b>
+`bridges/:id`: Display a bridge location, width, length and age for a selected ID<br>
+`bridges`: Display a list of bridges on the left pane and default location of the map which is Ontario<br>
+`new-template`: Angular template-driven form to input bridge information<br>
+`new-reactive`: Angular reactive form<br>
+`new-material`: Angular form with material UI<br>
 
 ## Build
 
@@ -26,5 +35,6 @@ Supertest: `npm install --save-dev supertest`
 
 Jasmine: `npm install --save-dev jasmine` 
 RUN Jasmine: `npm test` (ng test)
+
 *Refer to src/app/bridge-info-panel.component.spec.ts for Jasmine test.
 

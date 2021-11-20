@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getBridges().subscribe((data) => (this.bridges = data));
+    this.dataService.getBridges().subscribe((data) => {
+      (this.bridges = data)});
   }
 }

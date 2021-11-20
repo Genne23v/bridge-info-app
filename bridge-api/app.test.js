@@ -30,20 +30,28 @@ describe("api REST API", () => {
             expectCorsHeader("/api/bridges/:id", 404);
         });
 
-        test('should return a Bridge Object for a known id', async() => {
-            const { status, body } = await request(app).get('/api/bridges');
+        test("should return a Bridge Object for a known id", async() => {
+            const { status, body } = await request(app).get("/api/bridges");
             expect(status).toBe(200);
-            expect(Array.isArray(body).toBe(true))
+            expect(Array.isArray(body).toBe(true));
             const bridge0 = body[0];
 
-            const res = await request(app).get(`/api/bridges/${bridge0.id}`)
+            const res = await request(app).get(`/api/bridges/${bridge0.id}`);
             expect(res.status).toBe(200);
             const bridge = res.body;
 
             expect(bridge.id).toEqual(bridge0.id);
             expect(bridge.name).toEqual(bridge0.name);
 
-            expect(Object.keys(bridge)).toEqual(['id', 'name', 'lat', 'lng', 'year', 'length', 'width'])
-        })
+            expect(Object.keys(bridge)).toEqual([
+                "id",
+                "name",
+                "lat",
+                "lng",
+                "year",
+                "length",
+                "width",
+            ]);
+        });
     });
 });
