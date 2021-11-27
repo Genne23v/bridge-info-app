@@ -1,10 +1,10 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
 
 const db = require("../db");
 
-/* GET home page. */
-router.get("/bridges/:id", function(req, res) {
+router.get("/bridges/:id", passport.authenticate('jwt', { session: false }), function(req, res) {
     const id = req.params.id;
     const bridge = db.byId(id);
 

@@ -16,6 +16,10 @@ import { BridgeFormTemplateDrivenComponent } from './bridge-form-template-driven
 import { BridgeFormReactiveComponent } from './bridge-form-reactive/bridge-form-reactive.component';
 import { BridgeFormMaterialComponent } from './bridge-form-material/bridge-form-material.component';
 
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from '../environments/environment';
+import { LoginComponent } from './login/login.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +30,7 @@ import { BridgeFormMaterialComponent } from './bridge-form-material/bridge-form-
     BridgeFormTemplateDrivenComponent,
     BridgeFormReactiveComponent,
     BridgeFormMaterialComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,13 @@ import { BridgeFormMaterialComponent } from './bridge-form-material/bridge-form-
     MatInputModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token'),
+        allowedDomains: [new URL(environment.apiUrl).host],
+
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],
